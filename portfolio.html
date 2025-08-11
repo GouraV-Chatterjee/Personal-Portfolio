@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gourab Chatterjee - Software Engineer</title>
-    <meta name="description" content="Software Engineer 2 at Morgan Stanley specializing in Financial Technology, Microservices Architecture, and System Optimization. Expert in building scalable financial solutions.">
+    <meta name="description" content="Software Engineer specializing in Financial Technology, Microservices Architecture, and System Optimization. Expert in building scalable financial solutions.">
     
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <!-- EmailJS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
         // Initialize EmailJS with public key
-        emailjs.init('ddHABxtsXJck9G436HESf'); // You'll need to replace this with your actual public key
+        // IMPORTANT: Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS Public Key from EmailJS Dashboard -> Account -> API Keys
+        emailjs.init('smU6Vt8ioeg5Fn34W'); 
+        console.log('EmailJS initialized with public key: smU6Vt8ioeg5Fn34W');
     </script>
     
     <style>
@@ -37,7 +39,7 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: sans-serif;
             background: var(--dark-bg);
             color: var(--text-light);
             line-height: 1.6;
@@ -171,6 +173,7 @@
             justify-content: center;
             position: relative;
             background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-light) 100%);
+            padding-top: 5rem;
         }
 
         .hero::before {
@@ -193,6 +196,7 @@
         }
 
         .hero-title {
+            font-family: 'Poppins', sans-serif;
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 1rem;
@@ -657,7 +661,7 @@
         .exp-duration {
             color: var(--text-dim);
             margin-bottom: 15px;
-            font-family: 'Roboto Mono', monospace;
+            font-family: monospace;
         }
 
         .exp-description {
@@ -936,6 +940,41 @@
             }
         }
 
+        /* Scroll to Top Button */
+        .scroll-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--brand-color);
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(102, 217, 237, 0.4);
+        }
+
+        .scroll-to-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-5px);
+        }
+
+        .scroll-to-top-btn:hover {
+            background: var(--accent-2);
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(102, 217, 237, 0.6);
+        }
+
         @media (max-width: 480px) {
             .hero-content {
                 padding: 0 15px;
@@ -967,7 +1006,7 @@
     <header class="header">
         <div class="header-content">
             <a href="#" class="logo">
-                <img src="geminiAvatarbg.png" alt="Gourab Chatterjee">
+                <img src="ghibli.png" alt="Gourab Chatterjee">
             </a>
             <nav class="nav">
                 <a href="#home">Home</a>
@@ -988,10 +1027,10 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="hero-avatar">
-                <img src="geminiAvatarbg.png" alt="Gourab Chatterjee">
+                <img src="ghibli.png" alt="Gourab Chatterjee">
             </div>
             <h1 class="hero-title">Gourab Chatterjee</h1>
-            <p class="hero-subtitle">Software Engineer 2 at Morgan Stanley</p>
+            <p class="hero-subtitle">Software Engineer</p>
             <p class="hero-description">
                 Expertise in Financial Technology, Microservices Architecture, and System Optimization. 
                 Building scalable solutions that power the financial industry with innovative technology.
@@ -1018,30 +1057,31 @@
             </div>
             <div class="about-content">
                 <div class="about-image animate-on-scroll">
-                    <div class="profile-img">GC</div>
+                    <div class="profile-img">
+                        <img src="IMG_0685.JPG" alt="Gourab Chatterjee Profile" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; border-radius: 50%;">
+                    </div>
                 </div>
                 <div class="about-text animate-on-scroll">
                     <h3>Software Engineer 2</h3>
                     <p>
-                        I'm a dedicated Software Engineer 2 at Morgan Stanley with deep expertise in 
-                        financial technology and system optimization. My passion lies in creating 
-                        scalable, efficient solutions that revolutionize how financial systems 
-                        operate and serve millions of users.
+                        I’m a Software Engineer at Morgan Stanley, specializing in financial technology and system optimization. I’m passionate about designing scalable, high-performance solutions that transform financial systems and serve millions of users.
+
+                        
+                        
                     </p>
                     <p>
-                        With a strong foundation in microservices architecture and experience in building 
-                        insurance ticketing systems, I specialize in developing robust financial 
-                        infrastructures that can handle complex operations while maintaining high performance and reliability.
+                        With a solid background in microservices architecture and experience delivering innovative fintech solutions, I focus on building robust infrastructures capable of handling complex operations while ensuring speed, reliability, and scalability.
+                        
                     </p>
                     <div class="skills-list">
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">C#</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">TypeScript</span>
-                        <span class="skill-tag">DotNet Framework</span>
-                        <span class="skill-tag">Angular</span>
-                        <span class="skill-tag">Microservices</span>
-                        <span class="skill-tag">Kubernetes</span>
+                        <span class="skill-tag">Distributed Systems</span>
+                        <span class="skill-tag">API-Driven Development</span>
+                        <span class="skill-tag">Backend Development</span>
+                        <span class="skill-tag">System Design</span>
+                        <span class="skill-tag">Cloud Architecture</span>
+                        <span class="skill-tag">AI Agentic Workflows</span>
+                        <span class="skill-tag">Fintech Solutions</span>
+                        <span class="skill-tag">Database Management</span>
                     </div>
                 </div>
             </div>
@@ -1075,7 +1115,7 @@
                         <span class="highlight">Financial</span> Technology
                     </h3>
                     <div class="expertise-description">
-                        Specialized in building insurance ticketing systems and financial platforms. Experience with DotNet Framework and microservices architecture.
+                        Specialized in developing scalable financial platforms with expertise in .NET Framework and microservices architecture.
                     </div>
                 </div>
                 
@@ -1099,7 +1139,7 @@
         <div class="container">
             <div class="section-title animate-on-scroll">
                 <h2>Experience</h2>
-                <p>My journey in building cutting-edge financial technology solutions at Morgan Stanley</p>
+                <p>My journey in building cutting-edge financial technology solutions</p>
             </div>
             <div class="exp-timeline">
                 <div class="exp-item animate-on-scroll">
@@ -1108,10 +1148,7 @@
                         <h4 class="exp-company">MORGAN STANLEY</h4>
                         <p class="exp-duration">August 2023 – Present</p>
                         <p class="exp-description">
-                            Led a software release in the Insurance Ticketing System that incorporated over 30 different 
-                            Riders into more than 1000 active Insurance Policies, contributing to an estimated industry-wide 
-                            revenue impact of up to $6.1 billion. Spearheaded development and optimization reducing response 
-                            time by 60% and led real-time notification system development achieving 72% cost reduction.
+                            Developed and optimized large-scale insurance platforms, integrating complex features and streamlining backend systems. Improved performance, reduced operational costs, and built real-time notification capabilities to enhance efficiency, scalability, and user experience across enterprise-level financial technology solutions.
                         </p>
                     </div>
                     <div class="exp-icon">1</div>
@@ -1123,10 +1160,7 @@
                         <h4 class="exp-company">MORGAN STANLEY</h4>
                         <p class="exp-duration">June 2022 – August 2022</p>
                         <p class="exp-description">
-                            Led the transformation of the Morgan Stanley Home Loans Portal from a Monolithic architecture 
-                            to a modern Microservices-based architecture using C# and DotNet Framework. Designed and 
-                            implemented two key services to handle client payloads with complex post-processing operations, 
-                            resulting in 45% better response time.
+                            Redesigned the Morgan Stanley Home Loans Portal, transitioning from monolithic to microservices architecture. Built and deployed key C#/.NET services for complex client data processing, enhancing system scalability, maintainability, and significantly improving response times.
                         </p>
                     </div>
                     <div class="exp-icon">2</div>
@@ -1134,14 +1168,11 @@
                 
                 <div class="exp-item animate-on-scroll">
                     <div class="exp-content">
-                        <h3 class="exp-title">Academic Background</h3>
-                        <h4 class="exp-company">JADAVPUR UNIVERSITY</h4>
-                        <p class="exp-duration">August 2019 - May 2023</p>
+                        <h3 class="exp-title">AI & Automation Expert</h3>
+                        <h4 class="exp-company">MORGAN STANLEY</h4>
+                        <p class="exp-duration">Current</p>
                         <p class="exp-description">
-                            Bachelor of Science in Electronics and Instrumentation with CGPA: 8.37/10.0. 
-                            Achieved remarkable competitive programming accomplishments including AIR 48 in Meta HackerCup 2022, 
-                            6* rating in HackerRank, 4* in CodeChef, and Knight rating (1968) in LeetCode. 
-                            Active member of Jadavpur University Coding Club.
+                            Pioneering AI-driven workflows in financial technology, creating intelligent systems to autonomously manage complex insurance and financial operations. Implementing machine learning models to optimize policy processing, streamline backend operations, and enhance operational efficiency.
                         </p>
                     </div>
                     <div class="exp-icon">3</div>
@@ -1181,18 +1212,9 @@
                     <div class="contact-item">
                         <div class="contact-item-content">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>Kolkata, India</span>
+                            <span>Bangalore, India</span>
                         </div>
-                        <button class="copy-btn" onclick="copyToClipboard('Kolkata, India', this)">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-item-content">
-                            <i class="fas fa-briefcase"></i>
-                            <span>Software Engineer 2 at Morgan Stanley</span>
-                        </div>
-                        <button class="copy-btn" onclick="copyToClipboard('Software Engineer 2 at Morgan Stanley', this)">
+                        <button class="copy-btn" onclick="copyToClipboard('Bangalore, India', this)">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
@@ -1250,6 +1272,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="scroll-to-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
         // Custom Cursor
@@ -1426,7 +1453,8 @@ This email was automatically generated from your portfolio website.
             };
             
             // Send email using EmailJS
-            emailjs.send('service_portfolio', 'template_contact', templateParams)
+            // IMPORTANT: Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual EmailJS Service ID and Template ID from EmailJS Dashboard -> Email Services and Email Templates
+            emailjs.send('service_hb5gzho', 'template_217ypqq', templateParams)
                 .then(function(response) {
                     console.log('Email sent successfully:', response);
                     
@@ -1529,6 +1557,24 @@ This email was automatically generated from your portfolio website.
                 }, 2000);
             });
         }
+
+        // Scroll to Top Button functionality
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
 </html>
