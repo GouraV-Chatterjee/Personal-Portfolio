@@ -1,2 +1,2 @@
 # Personal-Portfolio
-Personal Portfolio of Avirup Sinha.
+Personal Portfolio of Gourab Chatterjee.
