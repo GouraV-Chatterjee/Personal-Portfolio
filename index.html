@@ -502,12 +502,23 @@
             animation: fadeInUp 1s ease 0.3s both;
         }
 
+        .hero-avatar {
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+            /* Ensure the container can accommodate the floating animation */
+            padding-top: 20px; /* Increased padding to prevent clipping */
+            padding-bottom: 20px; /* Increased padding to prevent clipping */
+        }
+
         .hero-avatar img {
             width: 150px;
             height: 150px;
             border-radius: 50%;
             transition: all 0.3s ease;
             animation: avatarFloat 3s ease-in-out infinite;
+            /* Ensure image is contained within its bounds */
+            display: block;
+            margin: 0 auto;
         }
 
         .hero-avatar img:hover {
@@ -519,7 +530,7 @@
                 transform: translateY(0px);
             }
             50% {
-                transform: translateY(-10px);
+                transform: translateY(-15px); /* Increased float distance slightly */
             }
         }
 
@@ -527,6 +538,11 @@
             .hero-avatar img {
                 width: 120px;
                 height: 120px;
+            }
+            .hero-avatar {
+                /* Adjust padding for mobile if needed, or rely on general padding */
+                padding-top: 20px; /* Increased padding for mobile to prevent clipping */
+                padding-bottom: 20px;
             }
         }
 
