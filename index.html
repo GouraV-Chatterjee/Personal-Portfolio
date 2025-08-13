@@ -23,7 +23,7 @@
     
     <style>
         :root {
-            --brand-color: #66d9ed;
+            --brand-color: #66d9ed; /* Deep Teal for a more professional look */
             --dark-bg: #0f0f0f;
             --dark-light: #17161a;
             --text-light: #ffffff;
@@ -107,11 +107,14 @@
         }
 
         .logo img {
-            width: 40px;
-            height: 40px;
+            width: 40px; /* Reverted to original width */
+            height: 40px; /* Reverted to original height */
             border-radius: 50%;
             border: 2px solid var(--brand-color);
             transition: all 0.3s ease;
+            object-fit: contain; /* Ensure the image fits within the circle */
+            object-position: center; /* Center the image within the circle */
+            padding: 5px; /* Add padding to shrink the image display area within the circle */
         }
 
         .logo img:hover {
@@ -185,7 +188,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2366d9ed" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23008080" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.1;
         }
 
@@ -256,7 +259,7 @@
             background: transparent;
             color: var(--brand-color);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 217, 237, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.3);
         }
 
         .btn-outline {
@@ -269,7 +272,7 @@
             background: var(--brand-color);
             color: var(--dark-bg);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 217, 237, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.3);
         }
 
         /* About Section */
@@ -292,7 +295,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2366d9ed" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23008080" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.05;
         }
         
@@ -305,7 +308,7 @@
         
         .expertise-card {
             background: rgba(23, 22, 26, 0.5);
-            border: 1px solid rgba(102, 217, 237, 0.2);
+            border: 1px solid rgba(0, 128, 128, 0.2);
             border-radius: 15px;
             padding: 40px 30px;
             transition: all 0.3s ease;
@@ -450,13 +453,13 @@
         }
 
         .skill-tag {
-            background: rgba(102, 217, 237, 0.1);
+            background: rgba(0, 128, 128, 0.1);
             color: var(--brand-color);
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
-            border: 1px solid rgba(102, 217, 237, 0.3);
+            border: 1px solid rgba(0, 128, 128, 0.3);
         }
 
         /* Custom Cursor */
@@ -476,7 +479,7 @@
             position: fixed;
             width: 40px;
             height: 40px;
-            border: 2px solid rgba(102, 217, 237, 0.5);
+            border: 2px solid rgba(0, 128, 128, 0.5);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
@@ -571,7 +574,7 @@
             top: 0;
             bottom: 0;
             width: 3px;
-            background: linear-gradient(to bottom, var(--brand-color), rgba(102, 217, 237, 0.3));
+            background: linear-gradient(to bottom, var(--brand-color), rgba(0, 128, 128, 0.3));
             transform: translateX(-50%);
             border-radius: 2px;
         }
@@ -594,10 +597,10 @@
 
         .exp-content {
             width: 42%;
-            background: rgba(102, 217, 237, 0.05);
+            background: rgba(0, 128, 128, 0.05);
             padding: 35px;
             border-radius: 20px;
-            border: 1px solid rgba(102, 217, 237, 0.2);
+            border: 1px solid rgba(0, 128, 128, 0.2);
             position: relative;
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -630,13 +633,13 @@
         .exp-item:nth-child(odd) .exp-content::before {
             right: -15px;
             border-width: 15px 0 15px 15px;
-            border-color: transparent transparent transparent rgba(102, 217, 237, 0.05);
+            border-color: transparent transparent transparent rgba(0, 128, 128, 0.05);
         }
 
         .exp-item:nth-child(even) .exp-content::before {
             left: -15px;
             border-width: 15px 15px 15px 0;
-            border-color: transparent rgba(102, 217, 237, 0.05) transparent transparent;
+            border-color: transparent rgba(0, 128, 128, 0.05) transparent transparent;
         }
 
         .exp-icon {
@@ -656,13 +659,13 @@
             font-weight: 900;
             z-index: 3;
             border: 4px solid var(--dark-bg);
-            box-shadow: 0 5px 20px rgba(102, 217, 237, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 128, 128, 0.3);
             transition: all 0.3s ease;
         }
 
         .exp-icon:hover {
             transform: translateX(-50%) scale(1.1);
-            box-shadow: 0 10px 30px rgba(102, 217, 237, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 128, 128, 0.5);
         }
 
         .exp-title {
@@ -714,16 +717,16 @@
             gap: 15px;
             margin-bottom: 20px;
             padding: 15px;
-            background: rgba(102, 217, 237, 0.05);
+            background: rgba(0, 128, 128, 0.05);
             border-radius: 10px;
-            border: 1px solid rgba(102, 217, 237, 0.2);
+            border: 1px solid rgba(0, 128, 128, 0.2);
             position: relative;
             transition: all 0.3s ease;
         }
 
         .contact-item:hover {
-            background: rgba(102, 217, 237, 0.1);
-            border-color: rgba(102, 217, 237, 0.4);
+            background: rgba(0, 128, 128, 0.1);
+            border-color: rgba(0, 128, 128, 0.4);
         }
 
         .contact-item-content {
@@ -783,8 +786,8 @@
             justify-content: center;
             width: 50px;
             height: 50px;
-            background: rgba(102, 217, 237, 0.1);
-            border: 2px solid rgba(102, 217, 237, 0.3);
+            background: rgba(0, 128, 128, 0.1);
+            border: 2px solid rgba(0, 128, 128, 0.3);
             border-radius: 50%;
             color: var(--brand-color);
             text-decoration: none;
@@ -795,14 +798,14 @@
             background: var(--brand-color);
             color: var(--dark-bg);
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 217, 237, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.3);
         }
 
         .contact-form {
-            background: rgba(102, 217, 237, 0.05);
+            background: rgba(0, 128, 128, 0.05);
             padding: 40px;
             border-radius: 15px;
-            border: 1px solid rgba(102, 217, 237, 0.2);
+            border: 1px solid rgba(0, 128, 128, 0.2);
         }
 
         .form-group {
@@ -821,7 +824,7 @@
             width: 100%;
             padding: 15px;
             background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(102, 217, 237, 0.3);
+            border: 1px solid rgba(0, 128, 128, 0.3);
             border-radius: 8px;
             color: var(--text-light);
             font-family: inherit;
@@ -843,7 +846,7 @@
         .footer {
             background: var(--dark-bg);
             padding: 40px 0;
-            border-top: 1px solid rgba(102, 217, 237, 0.2);
+            border-top: 1px solid rgba(0, 128, 128, 0.2);
         }
 
         .footer-content {
@@ -980,7 +983,7 @@
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
-            box-shadow: 0 5px 15px rgba(102, 217, 237, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 128, 128, 0.4);
         }
 
         .scroll-to-top-btn.show {
@@ -1025,8 +1028,8 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <a href="#" class="logo">
-                <img src="ghibli.png" alt="Gourab Chatterjee">
+            <a href="portfolio.html" class="logo">
+                <img src="suitcase.png" alt="Gourab Chatterjee">
             </a>
             <nav class="nav">
                 <a href="#home">Home</a>
