@@ -516,9 +516,11 @@
             border-radius: 50%;
             transition: all 0.3s ease;
             animation: avatarFloat 3s ease-in-out infinite;
-            /* Ensure image is contained within its bounds */
+            /* Ensure image is contained within its bounds and maintains aspect ratio */
             display: block;
             margin: 0 auto;
+            object-fit: cover; /* Add this to maintain aspect ratio */
+            object-position: 50% 30%; /* Adjust vertical position to show more of the bottom */
         }
 
         .hero-avatar img:hover {
