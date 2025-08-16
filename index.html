@@ -9,7 +9,13 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/brand.min.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- EmailJS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
@@ -21,7 +27,7 @@
     
     <style>
         :root {
-            --brand-color: #66d9ed;
+            --brand-color: #66d9ed; /* Deep Teal for a more professional look */
             --dark-bg: #0f0f0f;
             --dark-light: #17161a;
             --text-light: #ffffff;
@@ -40,7 +46,7 @@
 
         body {
             font-family: sans-serif;
-            background: var(--dark-bg);
+            background: #000; /* Changed to match hero section background */
             color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
@@ -53,7 +59,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark-bg);
+            background: #000; /* Changed to match hero section background */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -77,15 +83,21 @@
 
         /* Header */
         .header {
-            position: fixed;
-            top: 0;
-            left: 0;
+            position: sticky; /* Change to sticky for scroll-based behavior */
+            top: 0; /* Keep top: 0 for sticky positioning */
             width: 100%;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(20px);
+            background: #000; /* Changed to match hero section background */
+            /* backdrop-filter: blur(20px); Removed to prevent flickering */
             border-bottom: 1px solid rgba(102, 217, 237, 0.1);
             z-index: 1000;
-            transition: all 0.3s ease;
+            transition: top 0.3s ease; /* Transition only top property */
+            transform: translateZ(0); /* Promote to composite layer to prevent flickering */
+            will-change: transform; /* Hint to the browser for performance optimization */
+        }
+
+        /* Class to hide the header */
+        .header.hidden {
+            top: -80px; /* Adjust based on header height */
         }
 
         .header-content {
@@ -95,7 +107,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            height: 80px;
+            height: 60px;
         }
 
         .logo {
@@ -105,11 +117,14 @@
         }
 
         .logo img {
-            width: 40px;
-            height: 40px;
+            width: 40px; /* Reverted to original width */
+            height: 40px; /* Reverted to original height */
             border-radius: 50%;
             border: 2px solid var(--brand-color);
             transition: all 0.3s ease;
+            object-fit: contain; /* Ensure the image fits within the circle */
+            object-position: center; /* Center the image within the circle */
+            padding: 5px; /* Add padding to shrink the image display area within the circle */
         }
 
         .logo img:hover {
@@ -167,13 +182,15 @@
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: calc(100vh - 180px); /* Adjusted min-height to reduce gap by 100px from original 80px */
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Center content horizontally */
             position: relative;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-light) 100%);
-            padding-top: 5rem;
+            background: #000; /* Solid black background */
+            padding: 0 20px; /* Removed top padding */
+            overflow: hidden; /* Hide overflow for image */
+            gap: 50px; /* Space between text and image */
         }
 
         .hero::before {
@@ -183,104 +200,113 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2366d9ed" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.1;
+            background: radial-gradient(circle at center, rgba(0, 128, 128, 0.1) 0%, transparent 70%); /* Subtle radial gradient */
+            opacity: 0.3;
+            z-index: 0;
         }
 
         .hero-content {
-            max-width: 800px;
-            text-align: center;
-            padding: 0 20px;
+            max-width: 600px; /* Increased max-width for left column to accommodate buttons */
+            text-align: left; /* Align text to left */
+            padding: 0; /* Removed padding, handled by hero section */
             position: relative;
             z-index: 2;
+            flex-shrink: 0; /* Prevent shrinking */
+            margin-right: 50px; /* Add margin to the right of the text content */
+            margin-top: 80px; /* Adjusted margin-top to bring it down by an additional 10px */
         }
 
         .hero-title {
             font-family: 'Poppins', sans-serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2rem, 4vw, 3.5rem); /* Further reduced font size */
             font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--brand-color), var(--accent-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease 0.5s both;
+            margin-bottom: 0.5rem; /* Adjusted margin */
+            color: #fff; /* Default white color */
+            opacity: 0; /* Initially hide the title */
+            visibility: hidden; /* Initially hide the title */
+        }
+
+        .hero-title .blue-text {
+            color: #007bff; /* Blue color for "Gourab" */
         }
 
         .hero-subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            font-size: clamp(1.5rem, 3vw, 2rem); /* Increased font size */
+            color: var(--text-dim); /* Darker grey for subtitle */
+            margin-bottom: 1rem; /* Adjusted margin */
             animation: fadeInUp 1s ease 0.7s both;
+            text-align: center; /* Center align the subtitle */
         }
 
         .hero-description {
-            font-size: 1.2rem;
-            color: var(--text-dim);
-            margin-bottom: 2.5rem;
+            font-size: 1.1rem; /* Slightly smaller font size */
+            color: var(--text-muted); /* Lighter grey for description */
+            margin-bottom: 2rem; /* Adjusted margin */
             line-height: 1.8;
             animation: fadeInUp 1s ease 0.9s both;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
+            gap: 10px; /* Reduced gap */
+            justify-content: flex-start; /* Align buttons to left */
             animation: fadeInUp 1s ease 1.1s both;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 30px;
-            border: 2px solid;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        .cursor-blink {
+            animation: blink 0.7s infinite;
         }
 
-        .btn-primary {
-            background: var(--brand-color);
-            border-color: var(--brand-color);
-            color: var(--dark-bg);
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--brand-color);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 217, 237, 0.3);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border-color: var(--brand-color);
-            color: var(--brand-color);
-        }
-
-        .btn-outline:hover {
-            background: var(--brand-color);
-            color: var(--dark-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 217, 237, 0.3);
-        }
 
         /* About Section */
         .about {
             padding: 100px 0;
-            background: var(--dark-light);
+            background: #000; /* Changed to match hero section background */
+            margin-top: 20px; /* Added to move the section down by 20px */
         }
         
         /* Expertise Section */
         .expertise {
             padding: 100px 0;
-            background: var(--dark-bg);
+            background: #000; /* Changed to match hero section background */
             position: relative;
+        }
+
+        /* Expertise Card Animations */
+        .expertise-card {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        /* Initial states for animation */
+        .expertise-card.slide-in-left {
+            transform: translateX(-100%);
+        }
+
+        .expertise-card.slide-in-right {
+            transform: translateX(100%);
+        }
+
+        /* Animation for cards entering view */
+        .expertise-card.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Animation for cards exiting view */
+        .expertise-card.animate-out-left {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+
+        .expertise-card.animate-out-right {
+            opacity: 0;
+            transform: translateX(100%);
         }
         
         .expertise::before {
@@ -290,60 +316,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2366d9ed" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23008080" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
             opacity: 0.05;
-        }
-        
-        .expertise-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .expertise-card {
-            background: rgba(23, 22, 26, 0.5);
-            border: 1px solid rgba(102, 217, 237, 0.2);
-            border-radius: 15px;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-        }
-        
-        .expertise-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--brand-color);
-        }
-        
-        .expertise-icon {
-            font-size: 2.5rem;
-            color: var(--brand-color);
-            margin-bottom: 20px;
-        }
-        
-        .expertise-title {
-            font-size: 1.5rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .expertise-title .highlight {
-            color: var(--brand-color);
-            position: relative;
-        }
-        
-        .expertise-title .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--brand-color);
         }
         
         .expertise-description {
@@ -352,7 +326,8 @@
             font-size: 1rem;
         }
         
-        @media (max-width: 992px) {
+        /* The following media queries for expertise-grid are no longer needed due to Bootstrap's grid system */
+        /* @media (max-width: 992px) {
             .expertise-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -362,7 +337,7 @@
             .expertise-grid {
                 grid-template-columns: 1fr;
             }
-        }
+        } */
 
         .container {
             max-width: 1200px;
@@ -378,7 +353,7 @@
         .section-title h2 {
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 700;
-            color: var(--brand-color);
+            color: var(--text-light); /* Changed to white */
             margin-bottom: 20px;
         }
 
@@ -448,13 +423,13 @@
         }
 
         .skill-tag {
-            background: rgba(102, 217, 237, 0.1);
+            background: rgba(0, 128, 128, 0.1);
             color: var(--brand-color);
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
-            border: 1px solid rgba(102, 217, 237, 0.3);
+            border: 1px solid rgba(0, 128, 128, 0.3);
         }
 
         /* Custom Cursor */
@@ -474,7 +449,7 @@
             position: fixed;
             width: 40px;
             height: 40px;
-            border: 2px solid rgba(102, 217, 237, 0.5);
+            border: 2px solid rgba(0, 128, 128, 0.5);
             border-radius: 50%;
             pointer-events: none;
             z-index: 9998;
@@ -497,43 +472,75 @@
         }
 
         /* Hero Avatar */
-        .hero-avatar {
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.3s both;
+        .hero-image-container {
+            position: relative;
+            width: 500px; /* Fixed width for the image container */
+            height: 500px; /* Fixed height for the image container */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            animation: fadeInRight 1s ease 0.5s both;
+            border-radius: 20px; /* More rounded corners for the container */
+            overflow: hidden; /* Hide overflow for the image */
+            background: rgba(0, 128, 128, 0.05); /* Subtle background for the container */
+            border: 1px solid rgba(0, 128, 128, 0.2); /* Subtle border */
+            box-shadow: 0 0 50px rgba(0, 128, 128, 0.2); /* Lighter glow effect */
+            margin-top: 50px; /* Adjusted margin-top to bring it down */
+            animation: floatAnimation 3s ease-in-out infinite; /* Apply the floating animation */
+            transform: translateY(20px); /* Initial position offset */
         }
 
-        .hero-avatar img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ensure the entire image is visible without cropping */
+            border-radius: 0; /* No border-radius on the image itself */
+            box-shadow: none; /* No box-shadow on the image itself */
             transition: all 0.3s ease;
-            animation: avatarFloat 3s ease-in-out infinite;
         }
 
-        .hero-avatar img:hover {
-            transform: scale(1.05);
+        .hero-image-container img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 70px rgba(0, 128, 128, 0.7);
         }
 
-        @keyframes avatarFloat {
-            0%, 100% {
-                transform: translateY(0px);
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
             }
-            50% {
-                transform: translateY(-10px);
+            to {
+                opacity: 1;
+                transform: translateX(0);
             }
         }
 
         @media (max-width: 768px) {
-            .hero-avatar img {
-                width: 120px;
-                height: 120px;
+            .hero {
+                flex-direction: column; /* Stack content on mobile */
+                gap: 30px; /* Reduce gap on mobile */
+            }
+
+            .hero-content {
+                margin-right: 0; /* Remove margin on mobile */
+                text-align: center; /* Center text on mobile */
+            }
+
+            .cta-buttons {
+                justify-content: center; /* Center buttons on mobile */
+            }
+
+            .hero-image-container {
+                width: 300px; /* Smaller image on mobile */
+                height: 300px; /* Smaller image on mobile */
             }
         }
 
         /* Experience Section */
         .experience {
             padding: 100px 0;
-            background: var(--dark-bg);
+            background: #000; /* Changed to match hero section background */
         }
 
         .exp-timeline {
@@ -551,7 +558,7 @@
             top: 0;
             bottom: 0;
             width: 3px;
-            background: linear-gradient(to bottom, var(--brand-color), rgba(102, 217, 237, 0.3));
+            background: linear-gradient(to bottom, var(--brand-color), rgba(0, 128, 128, 0.3));
             transform: translateX(-50%);
             border-radius: 2px;
         }
@@ -574,10 +581,10 @@
 
         .exp-content {
             width: 42%;
-            background: rgba(102, 217, 237, 0.05);
+            background: rgba(0, 128, 128, 0.05);
             padding: 35px;
             border-radius: 20px;
-            border: 1px solid rgba(102, 217, 237, 0.2);
+            border: 1px solid rgba(0, 128, 128, 0.2);
             position: relative;
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -610,13 +617,13 @@
         .exp-item:nth-child(odd) .exp-content::before {
             right: -15px;
             border-width: 15px 0 15px 15px;
-            border-color: transparent transparent transparent rgba(102, 217, 237, 0.05);
+            border-color: transparent transparent transparent rgba(0, 128, 128, 0.05);
         }
 
         .exp-item:nth-child(even) .exp-content::before {
             left: -15px;
             border-width: 15px 15px 15px 0;
-            border-color: transparent rgba(102, 217, 237, 0.05) transparent transparent;
+            border-color: transparent rgba(0, 128, 128, 0.05) transparent transparent;
         }
 
         .exp-icon {
@@ -636,13 +643,13 @@
             font-weight: 900;
             z-index: 3;
             border: 4px solid var(--dark-bg);
-            box-shadow: 0 5px 20px rgba(102, 217, 237, 0.3);
+            box-shadow: 0 5px 20px rgba(0, 128, 128, 0.3);
             transition: all 0.3s ease;
         }
 
         .exp-icon:hover {
             transform: translateX(-50%) scale(1.1);
-            box-shadow: 0 10px 30px rgba(102, 217, 237, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 128, 128, 0.5);
         }
 
         .exp-title {
@@ -672,7 +679,7 @@
         /* Contact Section */
         .contact {
             padding: 100px 0;
-            background: var(--dark-light);
+            background: #000; /* Changed to match hero section background */
         }
 
         .contact-content {
@@ -694,16 +701,16 @@
             gap: 15px;
             margin-bottom: 20px;
             padding: 15px;
-            background: rgba(102, 217, 237, 0.05);
+            background: rgba(0, 128, 128, 0.05);
             border-radius: 10px;
-            border: 1px solid rgba(102, 217, 237, 0.2);
+            border: 1px solid rgba(0, 128, 128, 0.2);
             position: relative;
             transition: all 0.3s ease;
         }
 
         .contact-item:hover {
-            background: rgba(102, 217, 237, 0.1);
-            border-color: rgba(102, 217, 237, 0.4);
+            background: rgba(0, 128, 128, 0.1);
+            border-color: rgba(0, 128, 128, 0.4);
         }
 
         .contact-item-content {
@@ -763,8 +770,8 @@
             justify-content: center;
             width: 50px;
             height: 50px;
-            background: rgba(102, 217, 237, 0.1);
-            border: 2px solid rgba(102, 217, 237, 0.3);
+            background: rgba(0, 128, 128, 0.1);
+            border: 2px solid rgba(0, 128, 128, 0.3);
             border-radius: 50%;
             color: var(--brand-color);
             text-decoration: none;
@@ -775,14 +782,14 @@
             background: var(--brand-color);
             color: var(--dark-bg);
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 217, 237, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 128, 128, 0.3);
         }
 
         .contact-form {
-            background: rgba(102, 217, 237, 0.05);
+            background: rgba(0, 128, 128, 0.05);
             padding: 40px;
             border-radius: 15px;
-            border: 1px solid rgba(102, 217, 237, 0.2);
+            border: 1px solid rgba(0, 128, 128, 0.2);
         }
 
         .form-group {
@@ -801,7 +808,7 @@
             width: 100%;
             padding: 15px;
             background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(102, 217, 237, 0.3);
+            border: 1px solid rgba(0, 128, 128, 0.3);
             border-radius: 8px;
             color: var(--text-light);
             font-family: inherit;
@@ -821,9 +828,9 @@
 
         /* Footer */
         .footer {
-            background: var(--dark-bg);
+            background: #000; /* Changed to match hero section background */
             padding: 40px 0;
-            border-top: 1px solid rgba(102, 217, 237, 0.2);
+            border-top: 1px solid rgba(0, 128, 128, 0.2);
         }
 
         .footer-content {
@@ -843,8 +850,64 @@
             }
         }
 
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+
         .fade-in-up {
             animation: fadeInUp 0.8s ease both;
+        }
+
+        @keyframes floatAnimation {
+            0% {
+                transform: translateY(20px);
+            }
+            50% {
+                transform: translateY(-30px);
+            }
+            100% {
+                transform: translateY(20px);
+            }
         }
 
         /* Scroll animations */
@@ -931,6 +994,7 @@
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+                flex-wrap: wrap; /* Re-enable wrap for mobile */
             }
 
             .btn {
@@ -942,37 +1006,17 @@
 
         /* Scroll to Top Button */
         .scroll-to-top-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--brand-color);
-            color: var(--dark-bg);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
+            /* Base styles, mostly handled by Tailwind now */
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
-            box-shadow: 0 5px 15px rgba(102, 217, 237, 0.4);
         }
 
         .scroll-to-top-btn.show {
             opacity: 1;
             visibility: visible;
             transform: translateY(-5px);
-        }
-
-        .scroll-to-top-btn:hover {
-            background: var(--accent-2);
-            transform: translateY(-8px);
-            box-shadow: 0 8px 20px rgba(102, 217, 237, 0.6);
         }
 
         @media (max-width: 480px) {
@@ -990,6 +1034,7 @@
                 font-size: 3rem;
             }
         }
+
     </style>
 </head>
 <body>
@@ -1005,8 +1050,8 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <a href="#" class="logo">
-                <img src="ghibli.png" alt="Gourab Chatterjee">
+            <a href="/" class="logo">
+                <img src="assets/suitcase.png" alt="Gourab Chatterjee">
             </a>
             <nav class="nav">
                 <a href="#home">Home</a>
@@ -1026,25 +1071,28 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="hero-avatar">
-                <img src="ghibli.png" alt="Gourab Chatterjee">
-            </div>
-            <h1 class="hero-title">Gourab Chatterjee</h1>
-            <p class="hero-subtitle">Software Engineer</p>
+            <h1 class="hero-title"></h1>
+            <p class="hero-subtitle"><span class="typewriter" id="typewriter-text"></span><span class="cursor-blink">|</span></p>
             <p class="hero-description">
-                Expertise in Financial Technology, Microservices Architecture, and System Optimization. 
-                Building scalable solutions that power the financial industry with innovative technology.
+                Software engineer with a strong interest in system optimisation, microservices architecture, and financial technology, devoted to creating scalable and inventive solutions that propel the financial sector ahead.
             </p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-envelope"></i>
+            <div class="cta-buttons flex gap-4">
+                <a href="#contact" class="bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition duration-300 flex items-center">
+                    <i class="fas fa-envelope me-2"></i>
                     Get In Touch
                 </a>
-                <a href="#experience" class="btn btn-outline">
-                    <i class="fas fa-user"></i>
+                <a href="#experience" class="border border-gray-700 text-gray-300 px-6 py-2 rounded-lg shadow-lg hover:bg-gray-800 hover:border-gray-600 transition duration-300 flex items-center">
+                    <i class="fas fa-briefcase me-2"></i>
                     View Experience
                 </a>
+                <a href="https://drive.google.com/file/d/1MHjXvqI-J0a_t0EWs1vVVd3DuOkgcmH8/view?usp=sharing" class="border border-gray-700 text-gray-300 px-6 py-2 rounded-lg shadow-lg hover:bg-gray-800 hover:border-gray-600 transition duration-300 flex items-center" target="_blank">
+                    <i class="fas fa-download me-2"></i>
+                    My Resume
+                </a>
             </div>
+        </div>
+        <div class="hero-image-container">
+            <img src="assets/ghibli.png" alt="Gourab Chatterjee">
         </div>
     </section>
 
@@ -1093,41 +1141,148 @@
         <div class="container">
             <div class="section-title animate-on-scroll">
                 <h2>My Expertise</h2>
+                <p>Areas where I excel and bring value to projects</p>
             </div>
-            <div class="expertise-grid">
-                <div class="expertise-card animate-on-scroll">
-                    <div class="expertise-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <h3 class="expertise-title">
-                        <span class="highlight">Backend</span> Development
-                    </h3>
-                    <div class="expertise-description">
-                        Expert in C++, C#, JavaScript, TypeScript with strong foundation in object-oriented programming and data structures.
-                    </div>
-                </div>
-                
-                <div class="expertise-card animate-on-scroll">
-                    <div class="expertise-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="expertise-title">
-                        <span class="highlight">Financial</span> Technology
-                    </h3>
-                    <div class="expertise-description">
-                        Specialized in developing scalable financial platforms with expertise in .NET Framework and microservices architecture.
+            <div class="row g-4 justify-content-center">
+                <!-- Expertise Card 1: Backend Development -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card h-100 expertise-card bg-gray-900 bg-opacity-50 border border-blue-700 border-opacity-20 rounded-xl p-6 shadow-lg hover:translate-y-[-10px] hover:shadow-2xl hover:border-blue-500 transition-all duration-300 backdrop-blur-md">
+                        <div class="card-body text-left">
+                            <div class="expertise-icon text-blue-400 text-5xl mb-4">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <h3 class="card-title text-white text-2xl font-semibold mb-3">
+                                <span class="highlight text-blue-400 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-blue-400">Backend</span> Development
+                            </h3>
+                            <p class="card-text text-white text-base leading-relaxed">
+                                Expert in C++, C#, JavaScript, TypeScript with strong foundation in object-oriented programming and data structures. Building robust and scalable server-side applications.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="expertise-card animate-on-scroll">
-                    <div class="expertise-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                <!-- Expertise Card 2: Financial Technology -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card h-100 expertise-card bg-gray-900 bg-opacity-50 border border-purple-700 border-opacity-20 rounded-xl p-6 shadow-lg hover:translate-y-[-10px] hover:shadow-2xl hover:border-purple-500 transition-all duration-300 backdrop-blur-md">
+                        <div class="card-body text-left">
+                            <div class="expertise-icon text-purple-400 text-5xl mb-4">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3 class="card-title text-white text-2xl font-semibold mb-3">
+                                <span class="highlight text-purple-400 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-purple-400">Financial</span> Technology
+                            </h3>
+                            <p class="card-text text-white text-base leading-relaxed">
+                                Specialized in developing scalable financial platforms with expertise in .NET Framework and microservices architecture. Delivering high-performance fintech solutions.
+                            </p>
+                        </div>
                     </div>
-                    <h3 class="expertise-title">
-                        <span class="highlight">Cloud &</span> DevOps
-                    </h3>
-                    <div class="expertise-description">
-                        Proficient in Kubernetes, Docker, SQL Server, and TeamCity for building scalable and robust production systems.
+                </div>
+                
+                <!-- Expertise Card 3: Cloud & DevOps -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card h-100 expertise-card bg-gray-900 bg-opacity-50 border border-green-700 border-opacity-20 rounded-xl p-6 shadow-lg hover:translate-y-[-10px] hover:shadow-2xl hover:border-green-500 transition-all duration-300 backdrop-blur-md">
+                        <div class="card-body text-left">
+                            <div class="expertise-icon text-green-400 text-5xl mb-4">
+                                <i class="fas fa-cloud"></i>
+                            </div>
+                            <h3 class="card-title text-white text-2xl font-semibold mb-3">
+                                <span class="highlight text-green-400 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-green-400">Cloud &</span> DevOps
+                            </h3>
+                            <p class="card-text text-white text-base leading-relaxed">
+                                Proficient in Kubernetes, Docker, SQL Server, and TeamCity for building scalable and robust production systems. Ensuring seamless deployment and operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expertise Card 4: System Optimization -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card h-100 expertise-card bg-gray-900 bg-opacity-50 border border-yellow-700 border-opacity-20 rounded-xl p-6 shadow-lg hover:translate-y-[-10px] hover:shadow-2xl hover:border-yellow-500 transition-all duration-300 backdrop-blur-md">
+                        <div class="card-body text-left">
+                            <div class="expertise-icon text-yellow-400 text-5xl mb-4">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h3 class="card-title text-white text-2xl font-semibold mb-3">
+                                <span class="highlight text-yellow-400 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-yellow-400">System</span> Optimization
+                            </h3>
+                            <p class="card-text text-white text-base leading-relaxed">
+                                Focused on enhancing system performance, efficiency, and reliability through advanced profiling, tuning, and architectural improvements.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expertise Card 5: Microservices Architecture -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card h-100 expertise-card bg-gray-900 bg-opacity-50 border border-pink-700 border-opacity-20 rounded-xl p-6 shadow-lg hover:translate-y-[-10px] hover:shadow-2xl hover:border-pink-500 transition-all duration-300 backdrop-blur-md">
+                        <div class="card-body text-left">
+                            <div class="expertise-icon text-pink-400 text-5xl mb-4">
+                                <i class="fas fa-cubes"></i>
+                            </div>
+                            <h3 class="card-title text-white text-2xl font-semibold mb-3">
+                                <span class="highlight text-pink-400 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-pink-400">Microservices</span> Architecture
+                            </h3>
+                            <p class="card-text text-white text-base leading-relaxed">
+                                Designing and implementing distributed systems using microservices patterns for improved scalability, resilience, and maintainability.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expertise Card 6: AI Agentic Workflows -->
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="card h-100 expertise-card bg-gray-900 bg-opacity-50 border border-indigo-700 border-opacity-20 rounded-xl p-6 shadow-lg hover:translate-y-[-10px] hover:shadow-2xl hover:border-indigo-500 transition-all duration-300 backdrop-blur-md">
+                        <div class="card-body text-left">
+                            <div class="expertise-icon text-indigo-400 text-5xl mb-4">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3 class="card-title text-white text-2xl font-semibold mb-3">
+                                <span class="highlight text-indigo-400 relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-[2px] after:bg-indigo-400">AI Agentic</span> Workflows
+                            </h3>
+                            <p class="card-text text-white text-base leading-relaxed">
+                                Developing intelligent automation solutions using AI agents to streamline complex business processes and enhance decision-making.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stack Section -->
+    <section id="stack" class="expertise">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Stack</h2>
+                <p>Technologies and tools I work with</p>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-9">
+                    <div class="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-9 gap-x-[5px] gap-y-[30px] justify-items-center items-center">
+                        <!-- Row 1 -->
+                        <img src="assets/typescript.png" alt="TypeScript" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/js.png" alt="JavaScript" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/python.png" alt="Python" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/java.png" alt="Java" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/nodejs.png" alt="Node.js" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/angular.png" alt="Angular" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/csharp.png" alt="CSharp" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/docker.png" alt="Docker" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/sql-server.png" alt="PostgreSQL" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/chatgpt.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/c++.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/kubernetes.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/replit.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/springboot.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/teamcity.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/jenkins.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/git.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/github-mark.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/bitbucket.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/postman.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/mysql.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/tailwindcss.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <img src="assets/html.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
                     </div>
                 </div>
             </div>
@@ -1146,9 +1301,9 @@
                     <div class="exp-content">
                         <h3 class="exp-title">Software Engineer 2</h3>
                         <h4 class="exp-company">MORGAN STANLEY</h4>
-                        <p class="exp-duration">August 2023 – Present</p>
+                        <p class="exp-duration">March 2024 – Present</p>
                         <p class="exp-description">
-                            Developed and optimized large-scale insurance platforms, integrating complex features and streamlining backend systems. Improved performance, reduced operational costs, and built real-time notification capabilities to enhance efficiency, scalability, and user experience across enterprise-level financial technology solutions.
+                            Pioneering AI-driven workflows in financial technology, creating intelligent systems to autonomously manage complex insurance and financial operations. Implementing machine learning models to optimize policy processing, streamline backend operations, and enhance operational efficiency.
                         </p>
                     </div>
                     <div class="exp-icon">1</div>
@@ -1156,11 +1311,12 @@
                 
                 <div class="exp-item animate-on-scroll">
                     <div class="exp-content">
-                        <h3 class="exp-title">Technology Analyst Intern</h3>
+                        <h3 class="exp-title">Technology Associate</h3>
                         <h4 class="exp-company">MORGAN STANLEY</h4>
-                        <p class="exp-duration">June 2022 – August 2022</p>
+                        <p class="exp-duration">August 2023 – February 2024</p>
                         <p class="exp-description">
-                            Redesigned the Morgan Stanley Home Loans Portal, transitioning from monolithic to microservices architecture. Built and deployed key C#/.NET services for complex client data processing, enhancing system scalability, maintainability, and significantly improving response times.
+                            Developed and optimized large-scale insurance platforms, integrating complex features and streamlining backend systems. Improved performance, reduced operational costs, and built real-time notification capabilities to enhance efficiency, scalability, and user experience across enterprise-level financial technology solutions.
+                        </p>
                         </p>
                     </div>
                     <div class="exp-icon">2</div>
@@ -1168,11 +1324,11 @@
                 
                 <div class="exp-item animate-on-scroll">
                     <div class="exp-content">
-                        <h3 class="exp-title">AI & Automation Expert</h3>
+                        <h3 class="exp-title">Technology Analyst Intern</h3>
                         <h4 class="exp-company">MORGAN STANLEY</h4>
-                        <p class="exp-duration">Current</p>
+                        <p class="exp-duration">May 2022 - July 2022</p>
                         <p class="exp-description">
-                            Pioneering AI-driven workflows in financial technology, creating intelligent systems to autonomously manage complex insurance and financial operations. Implementing machine learning models to optimize policy processing, streamline backend operations, and enhance operational efficiency.
+                            Redesigned the Morgan Stanley Home Loans Portal, transitioning from monolithic to microservices architecture. Built and deployed key C#/.NET services for complex client data processing, enhancing system scalability, maintainability, and significantly improving response times.
                         </p>
                     </div>
                     <div class="exp-icon">3</div>
@@ -1230,7 +1386,7 @@
                             <i class="fas fa-envelope"></i>
                         </a>
                         <a href="https://leetcode.com/McCkenzie" class="social-link" target="_blank">
-                            <i class="fas fa-code"></i>
+                            <i class="cib-leetcode"></i>
                         </a>
                     </div>
                 </div>
@@ -1268,16 +1424,17 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2025 Gourab Chatterjee. All rights reserved.</p>
-                <p>Financial Technology & Microservices Architecture</p>
             </div>
         </div>
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollToTopBtn" class="scroll-to-top-btn">
+    <button id="scrollToTopBtn" class="scroll-to-top-btn fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 flex items-center justify-center text-xl">
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Custom Cursor
         const cursor = document.getElementById('cursor');
@@ -1359,10 +1516,14 @@
         // Header scroll effect
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(15, 15, 15, 0.95)';
+            if (window.scrollY === 0) {
+                // At the top of the page, show header
+                header.classList.remove('hidden');
+                header.style.background = 'rgba(0, 0, 0, 1)'; // Ensure solid black at top
             } else {
-                header.style.background = 'rgba(15, 15, 15, 0.95)';
+                // Not at the top, hide header
+                header.classList.add('hidden');
+                header.style.background = 'rgba(15, 15, 15, 0.95)'; // Maintain consistent background when hidden
             }
         });
 
@@ -1376,6 +1537,8 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
                 }
             });
         }, observerOptions);
@@ -1383,6 +1546,92 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
         });
+
+        // Expertise Section Animation
+        const expertiseSection = document.getElementById('expertise');
+        const expertiseCards = document.querySelectorAll('.expertise-card');
+
+        // Set initial positions for all cards
+        if (expertiseCards.length >= 1) expertiseCards[0].classList.add('slide-in-left');
+        if (expertiseCards.length >= 2) expertiseCards[1].classList.add('slide-in-right');
+        if (expertiseCards.length >= 3) expertiseCards[2].classList.add('slide-in-right');
+        if (expertiseCards.length >= 4) expertiseCards[3].classList.add('slide-in-left');
+        if (expertiseCards.length >= 5) expertiseCards[4].classList.add('slide-in-left');
+        if (expertiseCards.length >= 6) expertiseCards[5].classList.add('slide-in-right');
+
+        const expertiseObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Section is in view, animate cards in
+                    if (expertiseCards.length >= 1) {
+                        setTimeout(() => {
+                            expertiseCards[0].classList.remove('slide-in-left', 'animate-out-left');
+                            expertiseCards[0].classList.add('animate-in');
+                        }, 100); // Card 1
+                    }
+                    if (expertiseCards.length >= 2) {
+                        setTimeout(() => {
+                            expertiseCards[1].classList.remove('slide-in-right', 'animate-out-right');
+                            expertiseCards[1].classList.add('animate-in');
+                        }, 100); // Card 2
+                    }
+                    if (expertiseCards.length >= 3) {
+                        setTimeout(() => {
+                            expertiseCards[2].classList.remove('slide-in-right', 'animate-out-right');
+                            expertiseCards[2].classList.add('animate-in');
+                        }, 100); // Card 3
+                    }
+                    if (expertiseCards.length >= 4) {
+                        setTimeout(() => {
+                            expertiseCards[3].classList.remove('slide-in-left', 'animate-out-left');
+                            expertiseCards[3].classList.add('animate-in');
+                        }, 100); // Card 4 (starts with Card 1)
+                    }
+                    if (expertiseCards.length >= 5) {
+                        setTimeout(() => {
+                            expertiseCards[4].classList.remove('slide-in-left', 'animate-out-left');
+                            expertiseCards[4].classList.add('animate-in');
+                        }, 100); // Card 5 (starts with Card 2)
+                    }
+                    if (expertiseCards.length >= 6) {
+                        setTimeout(() => {
+                            expertiseCards[5].classList.remove('slide-in-right', 'animate-out-right');
+                            expertiseCards[5].classList.add('animate-in');
+                        }, 100); // Card 6 (starts with Card 3)
+                    }
+                } else {
+                    // Section is out of view, animate cards out
+                    if (expertiseCards.length >= 1) {
+                        expertiseCards[0].classList.remove('animate-in');
+                        expertiseCards[0].classList.add('animate-out-left');
+                    }
+                    if (expertiseCards.length >= 2) {
+                        expertiseCards[1].classList.remove('animate-in');
+                        expertiseCards[1].classList.add('animate-out-right');
+                    }
+                    if (expertiseCards.length >= 3) {
+                        expertiseCards[2].classList.remove('animate-in');
+                        expertiseCards[2].classList.add('animate-out-right');
+                    }
+                    if (expertiseCards.length >= 4) {
+                        expertiseCards[3].classList.remove('animate-in');
+                        expertiseCards[3].classList.add('animate-out-left');
+                    }
+                    if (expertiseCards.length >= 5) {
+                        expertiseCards[4].classList.remove('animate-in');
+                        expertiseCards[4].classList.add('animate-out-left');
+                    }
+                    if (expertiseCards.length >= 6) {
+                        expertiseCards[5].classList.remove('animate-in');
+                        expertiseCards[5].classList.add('animate-out-right');
+                    }
+                }
+            });
+        }, { threshold: 0.2 }); // Trigger when 20% of the section is visible
+
+        if (expertiseSection) {
+            expertiseObserver.observe(expertiseSection);
+        }
 
         // Form submission with EmailJS
         document.querySelector('form').addEventListener('submit', function(e) {
@@ -1430,10 +1679,6 @@
 💬 Message:
 ${message}
 
-📊 Technical Details:
-• Timestamp: ${timestamp}
-• Browser: ${userAgent}
-• Page URL: ${pageUrl}
 
 🎯 Response Required:
 This message was sent through your portfolio contact form and requires a response.
@@ -1502,26 +1747,84 @@ This email was automatically generated from your portfolio website.
         });
 
         // Typing effect for hero title
-        function typeWriter(element, text, speed = 100) {
+        function typeWriter(element, text, speed = 100, callback) {
             let i = 0;
-            element.innerHTML = '';
+            element.innerHTML = ''; // Clear existing content
             function type() {
                 if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
+                    const char = text.charAt(i);
+                    if (i < 6) { // "Gourab" has 6 characters
+                        element.innerHTML += `<span class="blue-text">${char}</span>`;
+                    } else {
+                        element.innerHTML += char;
+                    }
                     i++;
                     setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
                 }
             }
             type();
         }
 
-        // Initialize typing effect after page load
-        setTimeout(() => {
-            const heroTitle = document.querySelector('.hero-title');
-            if (heroTitle) {
-                typeWriter(heroTitle, 'Gourab Chatterjee', 150);
+        // Dynamic typing effect for hero subtitle
+        const phrases = ["Software Engineer", "Web Developer", "Open Source Contributor"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterTextElement = document.getElementById('typewriter-text');
+        const typingSpeed = 100; // Speed of typing
+        const deletingSpeed = 50; // Speed of deleting
+        const pauseBeforeDelete = 1500; // Pause before deleting
+        const pauseBeforeType = 500; // Pause before typing next phrase
+
+        function typeAndDelete() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                // Deleting text
+                typewriterTextElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(typeAndDelete, pauseBeforeType);
+                } else {
+                    setTimeout(typeAndDelete, deletingSpeed);
+                }
+            } else {
+                // Typing text
+                typewriterTextElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(typeAndDelete, pauseBeforeDelete);
+                } else {
+                    setTimeout(typeAndDelete, typingSpeed);
+                }
             }
-        }, 1000);
+        }
+
+        // Initialize typing effect after preloader hides
+        const preloader = document.getElementById('preloader');
+        const heroTitle = document.querySelector('.hero-title');
+
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            preloader.style.opacity = '0';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                if (heroTitle) {
+                    heroTitle.style.opacity = '1';
+                    heroTitle.style.visibility = 'visible';
+                    typeWriter(heroTitle, 'Gourab Chatterjee', 150, () => {
+                        // Start the dynamic typing effect for the subtitle after the title is typed
+                        if (typewriterTextElement) {
+                            typeAndDelete();
+                        }
+                    });
+                }
+            }, 500);
+        });
 
         // Copy to clipboard function
         function copyToClipboard(text, button) {
