@@ -50,6 +50,7 @@
             color: var(--text-light);
             line-height: 1.6;
             overflow-x: hidden;
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto; /* Use transparent image to hide default cursor */
         }
 
         /* Preloader */
@@ -376,9 +377,9 @@
         }
 
         .profile-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
+            width: 400px;
+            height: 400px;
+            border-radius: 10px; /* Changed to rounded corners */
             background: linear-gradient(135deg, var(--brand-color), var(--accent-2));
             display: flex;
             align-items: center;
@@ -388,18 +389,6 @@
             color: var(--dark-bg);
             margin: 0 auto;
             position: relative;
-        }
-
-        .profile-img::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px solid var(--brand-color);
-            border-radius: 50%;
-            opacity: 0.3;
         }
 
         .about-text h3 {
@@ -423,13 +412,32 @@
         }
 
         .skill-tag {
-            background: rgba(0, 128, 128, 0.1);
+            background: rgba(0, 128, 128, 0.15); /* Slightly darker background */
             color: var(--brand-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid rgba(0, 128, 128, 0.3);
+            padding: 10px 20px; /* Increased padding */
+            border-radius: 25px; /* More rounded corners */
+            font-size: 1rem; /* Slightly larger font */
+            font-weight: 600; /* Bolder font */
+            border: 2px solid rgba(0, 128, 128, 0.5); /* More prominent border */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+            cursor: default; /* Indicate it's not clickable */
+        }
+
+        .skill-tag:hover {
+            background: rgba(0, 128, 128, 0.25); /* Darker on hover */
+            border-color: var(--accent-2); /* Change border color on hover */
+            transform: translateY(-3px); /* Lift effect on hover */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+        }
+
+        .stack-link {
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+
+        .stack-link:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
         }
 
         /* Custom Cursor */
@@ -439,10 +447,11 @@
             height: 20px;
             background: var(--brand-color);
             border-radius: 50%;
-            pointer-events: none;
+            pointer-events: none; /* Re-enabled to allow clicks to pass through */
             z-index: 9999;
             transition: transform 0.1s ease;
-            mix-blend-mode: difference;
+            mix-blend-mode: difference; /* Re-enabled for better visibility */
+            transform: translate(-50%, -50%); /* Centered on mouse coordinates */
         }
 
         .cursor-outline {
@@ -451,14 +460,14 @@
             height: 40px;
             border: 2px solid rgba(0, 128, 128, 0.5);
             border-radius: 50%;
-            pointer-events: none;
+            pointer-events: none; /* Re-enabled to allow clicks to pass through */
             z-index: 9998;
             transition: all 0.15s ease;
             transform: translate(-50%, -50%);
         }
 
         .cursor-hover {
-            transform: scale(1.5);
+            transform: translate(-50%, -50%) scale(1.5); /* Adjusted for centering */
         }
 
         .cursor-outline-hover {
@@ -466,10 +475,6 @@
             border-color: var(--brand-color);
         }
 
-        /* Hide default cursor */
-        * {
-            cursor: none !important;
-        }
 
         /* Hero Avatar */
         .hero-image-container {
@@ -1041,16 +1046,6 @@
                 font-size: 1.2rem;
             }
 
-            /* Custom cursor disabled on mobile */
-            .cursor,
-            .cursor-outline {
-                display: none;
-            }
-
-            * {
-                cursor: auto !important;
-            }
-
             .contact-content {
                 grid-template-columns: 1fr;
             }
@@ -1165,22 +1160,21 @@
         <div class="container">
             <div class="section-title animate-on-scroll">
                 <h2>About Me</h2>
-                <p>Passionate about building innovative solutions in fintech and AI</p>
+                <p>Passionate about innovation and technology</p>
             </div>
             <div class="about-content">
                 <div class="about-image animate-on-scroll">
                     <div class="profile-img">
-                        <img src="IMG_0685.JPG" alt="Gourab Chatterjee Profile" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; border-radius: 50%;">
+                        <img src="assets/IMG_0685.JPG" alt="Gourab Chatterjee Profile" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 10%; border-radius: 10px;">
                     </div>
                 </div>
                 <div class="about-text animate-on-scroll">
-                    <h3>Software Engineer 2</h3>
+                    <h3>Software Development Engineer</h3>
                     <p>
-                        I’m a Software Engineer at Morgan Stanley, specializing in financial technology and system optimization. I’m passionate about designing scalable, high-performance solutions that transform financial systems and serve millions of users.
+                       I am a dedicated Software Engineer with a strong focus on system optimization and the development of scalable, high-performance solutions designed to serve a broad user base. My expertise lies in transforming complex operational challenges into efficient and reliable systems.
                     </p>
                     <p>
-                        With a solid background in microservices architecture and experience delivering innovative fintech solutions, I focus on building robust infrastructures capable of handling complex operations while ensuring speed, reliability, and scalability.
-
+                        Leveraging a solid background in microservices architecture and extensive experience in delivering innovative technology solutions, I specialize in constructing robust and resilient infrastructures. My work emphasizes handling intricate operations with exceptional speed, ensuring unwavering reliability, and building in the flexibility for future scalability across diverse domains.
                     </p>
                     <div class="skills-list">
                         <span class="skill-tag">Distributed Systems</span>
@@ -1321,29 +1315,29 @@
                 <div class="col-9">
                     <div class="grid grid-cols-6 md:grid-cols-8 lg:grid-cols-9 gap-x-[5px] gap-y-[30px] justify-items-center items-center">
                         <!-- Row 1 -->
-                        <img src="assets/typescript.png" alt="TypeScript" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/js.png" alt="JavaScript" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/python.png" alt="Python" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/java.png" alt="Java" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/nodejs.png" alt="Node.js" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/angular.png" alt="Angular" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/csharp.png" alt="CSharp" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/docker.png" alt="Docker" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/sql-server.png" alt="PostgreSQL" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/chatgpt.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/c++.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/kubernetes.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/replit.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/springboot.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/teamcity.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/jenkins.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/git.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/github-mark.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/bitbucket.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/postman.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/mysql.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/tailwindcss.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
-                        <img src="assets/html.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image">
+                        <a href="https://www.typescriptlang.org/docs/" target="_blank" class="stack-link"><img src="assets/typescript.png" alt="TypeScript" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/" target="_blank" class="stack-link"><img src="assets/js.png" alt="JavaScript" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://docs.python.org/3/" target="_blank" class="stack-link"><img src="assets/python.png" alt="Python" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://docs.oracle.com/en/java/" target="_blank" class="stack-link"><img src="assets/java.png" alt="Java" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://nodejs.org/en/docs/" target="_blank" class="stack-link"><img src="assets/nodejs.png" alt="Node.js" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://angular.io/docs" target="_blank" class="stack-link"><img src="assets/angular.png" alt="Angular" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://learn.microsoft.com/en-us/dotnet/csharp/" target="_blank" class="stack-link"><img src="assets/csharp.png" alt="CSharp" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://docs.docker.com/" target="_blank" class="stack-link"><img src="assets/docker.png" alt="Docker" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://learn.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver16" target="_blank" class="stack-link"><img src="assets/sql-server.png" alt="SQL Server" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://platform.openai.com/docs/" target="_blank" class="stack-link"><img src="assets/chatgpt.png" alt="ChatGPT" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://en.cppreference.com/w/cpp" target="_blank" class="stack-link"><img src="assets/c++.png" alt="C++" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://kubernetes.io/docs/" target="_blank" class="stack-link"><img src="assets/kubernetes.png" alt="Kubernetes" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://docs.replit.com/" target="_blank" class="stack-link"><img src="assets/replit.png" alt="Replit" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/" target="_blank" class="stack-link"><img src="assets/springboot.png" alt="Spring Boot" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://www.jetbrains.com/help/teamcity/" target="_blank" class="stack-link"><img src="assets/teamcity.png" alt="TeamCity" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://www.jenkins.io/doc/" target="_blank" class="stack-link"><img src="assets/jenkins.png" alt="Jenkins" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://git-scm.com/doc" target="_blank" class="stack-link"><img src="assets/git.png" alt="Git" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://docs.github.com/" target="_blank" class="stack-link"><img src="assets/github-mark.png" alt="GitHub" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://support.atlassian.com/bitbucket-cloud/" target="_blank" class="stack-link"><img src="assets/bitbucket.png" alt="Bitbucket" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://learning.postman.com/docs/" target="_blank" class="stack-link"><img src="assets/postman.png" alt="Postman" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://dev.mysql.com/doc/" target="_blank" class="stack-link"><img src="assets/mysql.png" alt="MySQL" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://tailwindcss.com/docs" target="_blank" class="stack-link"><img src="assets/tailwindcss.png" alt="Tailwind CSS" class="h-12 w-12 object-contain stack-image"></a>
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank" class="stack-link"><img src="assets/html.png" alt="HTML" class="h-12 w-12 object-contain stack-image"></a>
                     </div>
                 </div>
             </div>
@@ -1443,13 +1437,13 @@
                         <a href="https://github.com/GouraV-Chatterjee" target="_blank" class="social-link">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/gourab-chatterjee/" target="_blank" class="social-link">
+                        <a href="https://www.linkedin.com/in/gourab--chatterjee/" target="_blank" class="social-link">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="https://twitter.com/Gourab_C" target="_blank" class="social-link">
+                        <a href="https://x.com/Gourab__Chat" target="_blank" class="social-link">
                             <i class="fab fa-x-twitter"></i>
                         </a>
-                        <a href="https://www.facebook.com/your_facebook_profile" target="_blank" class="social-link">
+                        <a href="https://www.facebook.com/profile.php?id=100008842748927" target="_blank" class="social-link">
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
@@ -1495,7 +1489,7 @@
     </footer>
 
     <!-- Scroll to Top Button -->
-    <button id="scrollToTopBtn" class="scroll-to-top-btn fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 flex items-center justify-center text-xl">
+    <button id="scrollToTopBtn" class="scroll-to-top-btn fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 flex items-center justify-center text-xl">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -1517,6 +1511,8 @@
             
             cursor.style.left = mouseX + 'px';
             cursor.style.top = mouseY + 'px';
+            cursorOutline.style.left = mouseX + 'px'; /* Initialize outline position */
+            cursorOutline.style.top = mouseY + 'px'; /* Initialize outline position */
         });
 
         function animateOutline() {
@@ -1531,7 +1527,7 @@
         animateOutline();
 
         // Cursor hover effects
-        const hoverElements = document.querySelectorAll('a, button, .btn, .exp-icon, .social-link, .skill-tag');
+        const hoverElements = document.querySelectorAll('a, button, .btn, .exp-icon, .social-link, .skill-tag, .stack-link');
         
         hoverElements.forEach(element => {
             element.addEventListener('mouseenter', () => {
@@ -1544,6 +1540,7 @@
                 cursorOutline.classList.remove('cursor-outline-hover');
             });
         });
+
 
         // Hide cursor when leaving window
         document.addEventListener('mouseleave', () => {
