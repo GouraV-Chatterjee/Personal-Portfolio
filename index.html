@@ -546,6 +546,20 @@
         .experience {
             padding: 100px 0;
             background: #000; /* Changed to match hero section background */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(102, 217, 237, 0.05) 0%, transparent 70%); /* Subtle radial gradient */
+            opacity: 0.5;
+            z-index: 0;
         }
 
         .exp-timeline {
@@ -554,30 +568,32 @@
             max-width: 1000px;
             margin-left: auto;
             margin-right: auto;
+            padding: 0 20px; /* Add horizontal padding */
         }
 
         .exp-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--brand-color), rgba(0, 128, 128, 0.3));
-            transform: translateX(-50%);
-            border-radius: 2px;
+            content: none; /* Remove the middle line */
         }
 
         .exp-item {
             position: relative;
-            margin-bottom: 80px;
+            margin-bottom: 60px; /* Adjusted margin for more space */
             display: flex;
-            align-items: flex-start;
-            min-height: 200px;
+            align-items: center; /* Align items to center */
+            min-height: auto; /* Allow height to adjust based on content */
+            justify-content: center; /* Center items horizontally */
+            opacity: 0; /* Initial state for animation */
+            transform: translateY(50px); /* Initial state for animation */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition */
+        }
+
+        .exp-item.in-view {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .exp-item:nth-child(odd) {
-            flex-direction: row-reverse;
+            flex-direction: row; /* Keep content on the same side */
         }
 
         .exp-item:last-child {
@@ -585,100 +601,77 @@
         }
 
         .exp-content {
-            width: 42%;
-            background: rgba(0, 128, 128, 0.05);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 128, 128, 0.2);
+            width: 1000px; /* Increased width by 50px */
+            background: rgba(30, 30, 30, 0.7); /* Darker grey with transparency */
+            padding: 30px; /* Slightly reduced padding */
+            border-radius: 15px; /* Slightly less rounded corners */
+            border: 1px solid rgba(0, 128, 128, 0.5); /* Subtle blue border */
             position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
+            backdrop-filter: blur(15px); /* Increased blur */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+            transition: all 0.4s ease; /* Slower transition */
+            z-index: 1; /* Ensure content is above the timeline line */
+            margin: 0 auto; /* Center the content horizontally */
         }
 
         .exp-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            border-color: var(--brand-color);
+            transform: translateY(-8px); /* More pronounced lift */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5); /* Stronger shadow on hover */
+            border-color: #007bff; /* Highlight border on hover with vibrant blue */
+            background: rgba(40, 40, 40, 0.8); /* Slightly lighter dark grey on hover */
         }
 
         .exp-item:nth-child(odd) .exp-content {
-            margin-right: 58%;
+            margin-right: auto; /* Reset margin */
+            margin-left: auto; /* Reset margin */
         }
 
         .exp-item:nth-child(even) .exp-content {
-            margin-left: 58%;
+            margin-left: auto; /* Reset margin */
+            margin-right: auto; /* Reset margin */
         }
 
         .exp-content::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            width: 0;
-            height: 0;
-            border-style: solid;
+            content: none; /* Remove the arrow */
         }
 
         .exp-item:nth-child(odd) .exp-content::before {
-            right: -15px;
-            border-width: 15px 0 15px 15px;
-            border-color: transparent transparent transparent rgba(0, 128, 128, 0.05);
+            content: none; /* Remove the arrow */
         }
 
         .exp-item:nth-child(even) .exp-content::before {
-            left: -15px;
-            border-width: 15px 15px 15px 0;
-            border-color: transparent rgba(0, 128, 128, 0.05) transparent transparent;
+            content: none; /* Remove the arrow */
         }
 
         .exp-icon {
-            position: absolute;
-            left: 50%;
-            top: 30px;
-            transform: translateX(-50%);
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--brand-color), var(--accent-2));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--dark-bg);
-            font-size: 1.8rem;
-            font-weight: 900;
-            z-index: 3;
-            border: 4px solid var(--dark-bg);
-            box-shadow: 0 5px 20px rgba(0, 128, 128, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .exp-icon:hover {
-            transform: translateX(-50%) scale(1.1);
-            box-shadow: 0 10px 30px rgba(0, 128, 128, 0.5);
+            display: none; /* Hide the circles */
         }
 
         .exp-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem; /* Slightly larger title */
             color: var(--brand-color);
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Reduced margin */
+            font-weight: 700; /* Bolder title */
         }
 
         .exp-company {
-            font-size: 1.2rem;
+            font-size: 1.1rem; /* Slightly smaller company name */
             color: var(--text-light);
-            margin-bottom: 10px;
-            font-weight: 600;
+            margin-bottom: 8px; /* Reduced margin */
+            font-weight: 500; /* Lighter weight */
         }
 
         .exp-duration {
             color: var(--text-dim);
-            margin-bottom: 15px;
-            font-family: monospace;
+            margin-bottom: 12px; /* Reduced margin */
+            font-family: 'Poppins', sans-serif; /* Use Poppins for duration */
+            font-size: 0.95rem; /* Slightly smaller font */
         }
 
         .exp-description {
             color: var(--text-muted);
-            line-height: 1.7;
+            line-height: 1.8; /* Increased line height for readability */
+            font-size: 1rem; /* Consistent font size */
         }
 
         /* Contact Section */
@@ -1017,20 +1010,20 @@
             }
 
             .exp-timeline::before {
-                left: 35px;
+                content: none; /* Ensure no line on mobile */
             }
 
             .exp-item {
                 flex-direction: column !important;
-                align-items: flex-start;
+                align-items: center; /* Center items on mobile */
                 margin-bottom: 60px;
                 min-height: auto;
             }
 
             .exp-content {
-                width: calc(100% - 80px);
-                margin-left: 80px !important;
-                margin-right: 0 !important;
+                width: 90%; /* Make cards wider on mobile */
+                margin-left: auto !important;
+                margin-right: auto !important;
             }
 
             .exp-content::before {
@@ -1038,12 +1031,14 @@
             }
 
             .exp-icon {
-                left: 35px !important;
-                top: 20px !important;
-                transform: translateX(-50%);
+                position: relative; /* Change to relative positioning */
+                margin-bottom: 20px; /* Add margin below icon */
                 width: 50px;
                 height: 50px;
                 font-size: 1.2rem;
+                left: auto !important; /* Reset left */
+                top: auto !important; /* Reset top */
+                transform: none; /* Remove previous transform */
             }
 
             .contact-content {
@@ -1354,27 +1349,54 @@
             <div class="exp-timeline">
                 <div class="exp-item animate-on-scroll">
                     <div class="exp-content">
-                        <h3 class="exp-title">Software Engineer 2</h3>
-                        <h4 class="exp-company">MORGAN STANLEY</h4>
+                        <h3 class="exp-title">Software Development Engineer 2</h3>
+                        <h4 class="exp-company">Morgan Stanley</h4>
                         <p class="exp-duration">March 2024 – Present</p>
                         <p class="exp-description">
-                            Pioneering AI-driven workflows in financial technology, creating intelligent systems to autonomously manage complex insurance and financial operations. Implementing machine learning models to optimize policy processing, streamline backend operations, and enhance operational efficiency.
+                            Spearheading next-generation AI integration initiatives within Morgan Stanley’s financial technology ecosystem, driving digital transformation through intelligent automation and machine learning solutions.
                         </p>
+                        <h5 class="text-white text-lg font-bold mt-4 mb-2">Key Achievements</h5>
+                        <ul class="list-disc list-inside text-gray-400 text-base space-y-1">
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Architected autonomous AI workflows for insurance and financial operations</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Led ML model implementation for policy optimization and risk assessment</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Engineered intelligent systems to improve operational efficiency</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Established scalable ML pipelines with monitoring and analytics</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">C#</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Angular</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">SQL</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Docker</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Kubernetes</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Java</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">SpringBoot</span>
+                        </div>
                     </div>
-                    <div class="exp-icon">1</div>
                 </div>
                 
                 <div class="exp-item animate-on-scroll">
                     <div class="exp-content">
                         <h3 class="exp-title">Technology Associate</h3>
-                        <h4 class="exp-company">MORGAN STANLEY</h4>
+                        <h4 class="exp-company">Morgan Stanley</h4>
                         <p class="exp-duration">August 2023 – February 2024</p>
-                        <p class="exp-description">
-                            Developed and optimized large-scale insurance platforms, integrating complex features and streamlining backend systems. Improved performance, reduced operational costs, and built real-time notification capabilities to enhance efficiency, scalability, and user experience across enterprise-level financial technology solutions.
+                        <p class="text-gray-300 text-base leading-relaxed mb-4">
+                            Transformed enterprise-scale insurance platforms through strategic system optimization and performance enhancement, delivering measurable improvements in scalability and user experience.
                         </p>
-                        </p>
+                        <h5 class="text-white text-lg font-bold mt-4 mb-2">Key Achievements</h5>
+                        <ul class="list-disc list-inside text-gray-400 text-base space-y-1">
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Re-engineered large-scale insurance platforms for better performance</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Implemented real-time notification systems to enhance user engagement</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Optimized database queries and caching strategies for faster response times</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Established comprehensive monitoring systems for platform reliability</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">.NET Core</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">SQL Server</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Kubernetes</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Docker</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Java</span>
+                        </div>
                     </div>
-                    <div class="exp-icon">2</div>
                 </div>
                 
                 <div class="exp-item animate-on-scroll">
@@ -1382,11 +1404,24 @@
                         <h3 class="exp-title">Technology Analyst Intern</h3>
                         <h4 class="exp-company">MORGAN STANLEY</h4>
                         <p class="exp-duration">May 2022 - July 2022</p>
-                        <p class="exp-description">
-                            Redesigned the Morgan Stanley Home Loans Portal, transitioning from monolithic to microservices architecture. Built and deployed key C#/.NET services for complex client data processing, enhancing system scalability, maintainability, and significantly improving response times.
+                        <p class="text-gray-300 text-base leading-relaxed mb-4">
+                            Led critical modernization initiatives for Morgan Stanley's Home Loans Portal, successfully transitioning legacy systems to scalable microservices architecture while maintaining zero downtime.
                         </p>
+                        <h5 class="text-white text-lg font-bold mt-4 mb-2">Key Achievements</h5>
+                        <ul class="list-disc list-inside text-gray-400 text-base space-y-1">
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Architected migration from monolithic to microservices architecture</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Developed production-ready services with comprehensive testing coverage</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Implemented circuit breaker patterns and retry mechanisms for resilience</li>
+                            <li class="flex items-start"><span class="text-blue-400 mr-2 text-xl">&bull;</span>Designed RESTful APIs following industry best practices</li>
+                        </ul>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">C#</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">.NET Framework</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">REST APIs</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">TeamCity</span>
+                            <span class="bg-gray-700 text-gray-300 px-3 py-1 rounded-md text-sm">Git</span>
+                        </div>
                     </div>
-                    <div class="exp-icon">3</div>
                 </div>
             </div>
         </div>
@@ -1623,6 +1658,22 @@
 
         document.querySelectorAll('.animate-on-scroll').forEach(el => {
             observer.observe(el);
+        });
+
+        // Experience Section Animation
+        const experienceItems = document.querySelectorAll('.exp-item');
+        const experienceObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                } else {
+                    entry.target.classList.remove('in-view');
+                }
+            });
+        }, { threshold: 0.2 }); // Trigger when 20% of the item is visible
+
+        experienceItems.forEach(item => {
+            experienceObserver.observe(item);
         });
 
         // Expertise Section Animation
