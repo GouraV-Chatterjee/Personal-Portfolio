@@ -1405,32 +1405,47 @@
                         <i class="fas fa-users text-blue-400 mr-3 text-3xl"></i> Contact Information
                     </h3>
                     <div class="space-y-3"> <!-- Reduced space-y -->
-                        <div class="bg-gray-800 bg-opacity-50 rounded-lg p-4 flex items-center space-x-4">
-                            <div class="bg-blue-600 bg-opacity-70 p-3 rounded-full w-10 h-10 flex items-center justify-center">
-                                <i class="far fa-envelope text-white text-xl"></i>
+                        <div class="contact-item bg-gray-800 bg-opacity-50 rounded-lg p-4 flex items-center space-x-4">
+                            <div class="contact-item-content">
+                                <div class="bg-blue-600 bg-opacity-70 p-3 rounded-full w-10 h-10 flex items-center justify-center">
+                                    <i class="far fa-envelope text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-xs">Email</p>
+                                    <p class="text-white text-lg font-medium" id="email-to-copy">gouravchatterjee2@gmail.com</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-gray-400 text-xs">Email</p>
-                                <p class="text-white text-lg font-medium">gouravchatterjee2@gmail.com</p>
-                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('gouravchatterjee2@gmail.com', this)">
+                                <i class="fas fa-copy"></i>
+                            </button>
                         </div>
-                        <div class="bg-gray-800 bg-opacity-50 rounded-lg p-4 flex items-center space-x-4">
-                            <div class="bg-green-600 bg-opacity-70 p-3 rounded-full w-10 h-10 flex items-center justify-center">
-                                <i class="fas fa-phone-volume text-white text-xl"></i>
+                        <div class="contact-item bg-gray-800 bg-opacity-50 rounded-lg p-4 flex items-center space-x-4">
+                            <div class="contact-item-content">
+                                <div class="bg-green-600 bg-opacity-70 p-3 rounded-full w-10 h-10 flex items-center justify-center">
+                                    <i class="fas fa-phone-volume text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-xs">Phone</p>
+                                    <p class="text-white text-lg font-medium" id="phone-to-copy">+91-7074083480</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-gray-400 text-xs">Phone</p>
-                                <p class="text-white text-lg font-medium">+91-7074083480</p>
-                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('+91-7074083480', this)">
+                                <i class="fas fa-copy"></i>
+                            </button>
                         </div>
-                        <div class="bg-gray-800 bg-opacity-50 rounded-lg p-4 flex items-center space-x-4">
-                            <div class="bg-purple-600 bg-opacity-70 p-3 rounded-full w-10 h-10 flex items-center justify-center">
-                                <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                        <div class="contact-item bg-gray-800 bg-opacity-50 rounded-lg p-4 flex items-center space-x-4">
+                            <div class="contact-item-content">
+                                <div class="bg-purple-600 bg-opacity-70 p-3 rounded-full w-10 h-10 flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-xs">Location</p>
+                                    <p class="text-white text-lg font-medium" id="location-to-copy">Bangalore, India</p>
+                                </div>
                             </div>
-                            <div>
-                                <p class="text-gray-400 text-xs">Location</p>
-                                <p class="text-white text-lg font-medium">Bangalore, India</p>
-                            </div>
+                            <button class="copy-btn" onclick="copyToClipboard('Bangalore, India', this)">
+                                <i class="fas fa-copy"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="social-links">
