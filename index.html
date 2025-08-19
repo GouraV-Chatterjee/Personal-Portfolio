@@ -1940,12 +1940,23 @@ This email was automatically generated from your portfolio website.
         });
 
         // Close mobile menu when a link is clicked
-        document.querySelectorAll('.nav a').forEach(link => { // Changed selector from .nav.mobile-menu a to .nav a
+        document.querySelectorAll('.nav a').forEach(link => {
             link.addEventListener('click', function() {
                 nav.classList.remove('active');
+                menuToggle.classList.remove('active'); // Also remove active class from menu-toggle
             });
         });
-        // Removed duplicate event listener for menuToggle
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = nav.contains(event.target);
+            const isClickInsideMenuToggle = menuToggle.contains(event.target);
+
+            if (!isClickInsideNav && !isClickInsideMenuToggle && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
 
         // Typing effect for hero title
         function typeWriter(element, text, speed = 100, callback) {
