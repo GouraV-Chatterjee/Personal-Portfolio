@@ -53,6 +53,12 @@
             cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='), auto; /* Use transparent image to hide default cursor */
         }
 
+        @media (max-width: 768px) {
+            body {
+                cursor: auto !important; /* Remove custom cursor on mobile */
+            }
+        }
+
         /* Preloader */
         .preloader {
             position: fixed;
@@ -523,7 +529,7 @@
 
         @media (max-width: 768px) {
             .hero {
-                flex-direction: column; /* Stack content on mobile */
+                flex-direction: column-reverse; /* Stack content on mobile, image first */
                 gap: 30px; /* Reduce gap on mobile */
             }
 
@@ -1550,58 +1556,64 @@
         const cursor = document.getElementById('cursor');
         const cursorOutline = document.getElementById('cursor-outline');
 
-        let mouseX = 0;
-        let mouseY = 0;
-        let outlineX = 0;
-        let outlineY = 0;
+        // Only enable custom cursor on non-mobile screens
+        if (window.innerWidth > 768) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let outlineX = 0;
+            let outlineY = 0;
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-            cursorOutline.style.left = mouseX + 'px'; /* Initialize outline position */
-            cursorOutline.style.top = mouseY + 'px'; /* Initialize outline position */
-        });
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
+                cursorOutline.style.left = mouseX + 'px'; /* Initialize outline position */
+                cursorOutline.style.top = mouseY + 'px'; /* Initialize outline position */
+            });
 
-        function animateOutline() {
-            outlineX += (mouseX - outlineX) * 0.1;
-            outlineY += (mouseY - outlineY) * 0.1;
+            function animateOutline() {
+                outlineX += (mouseX - outlineX) * 0.1;
+                outlineY += (mouseY - outlineY) * 0.1;
+                
+                cursorOutline.style.left = outlineX + 'px';
+                cursorOutline.style.top = outlineY + 'px';
+                
+                requestAnimationFrame(animateOutline);
+            }
+            animateOutline();
+
+            // Cursor hover effects
+            const hoverElements = document.querySelectorAll('a, button, .btn, .exp-icon, .social-link, .skill-tag, .stack-link');
             
-            cursorOutline.style.left = outlineX + 'px';
-            cursorOutline.style.top = outlineY + 'px';
-            
-            requestAnimationFrame(animateOutline);
+            hoverElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursor.classList.add('cursor-hover');
+                    cursorOutline.classList.add('cursor-outline-hover');
+                });
+                
+                element.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('cursor-hover');
+                    cursorOutline.classList.remove('cursor-outline-hover');
+                });
+            });
+
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorOutline.style.opacity = '0';
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                cursorOutline.style.opacity = '1';
+            });
+        } else {
+            // Hide custom cursor elements on mobile
+            if (cursor) cursor.style.display = 'none';
+            if (cursorOutline) cursorOutline.style.display = 'none';
         }
-        animateOutline();
-
-        // Cursor hover effects
-        const hoverElements = document.querySelectorAll('a, button, .btn, .exp-icon, .social-link, .skill-tag, .stack-link');
-        
-        hoverElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                cursor.classList.add('cursor-hover');
-                cursorOutline.classList.add('cursor-outline-hover');
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                cursor.classList.remove('cursor-hover');
-                cursorOutline.classList.remove('cursor-outline-hover');
-            });
-        });
-
-
-        // Hide cursor when leaving window
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-            cursorOutline.style.opacity = '0';
-        });
-
-        document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '1';
-            cursorOutline.style.opacity = '1';
-        });
 
         // Preloader
         window.addEventListener('load', function() {
