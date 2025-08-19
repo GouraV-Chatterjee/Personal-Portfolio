@@ -187,15 +187,36 @@
         .menu-toggle {
             display: none;
             flex-direction: column;
+            justify-content: space-between;
+            width: 30px; /* Slightly wider */
+            height: 20px; /* Adjusted height for 3 lines */
             cursor: pointer;
+            padding: 2px 0; /* Add some padding for better touch area */
+            position: relative;
+            z-index: 1001; /* Ensure it's above the nav */
         }
 
         .menu-toggle span {
-            width: 25px;
+            display: block;
+            width: 100%;
             height: 3px;
             background: var(--brand-color);
-            margin: 3px 0;
-            transition: 0.3s;
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+            transform-origin: center;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
         /* Hero Section */
@@ -1140,7 +1161,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <a href="/" class="logo">
+            <a href="#" class="logo" onclick="location.reload()">
                 <img src="assets/suitcase.png" alt="Gourab Chatterjee">
             </a>
             <nav class="nav">
@@ -1640,9 +1661,9 @@
                 cursorOutline.style.opacity = '1';
             });
         } else {
-            // Hide custom cursor elements on mobile
-            if (cursor) cursor.style.display = 'none';
-            if (cursorOutline) cursorOutline.style.display = 'none';
+            // Remove custom cursor elements from DOM on mobile
+            if (cursor && cursor.parentNode) cursor.parentNode.removeChild(cursor);
+            if (cursorOutline && cursorOutline.parentNode) cursorOutline.parentNode.removeChild(cursorOutline);
         }
 
         // Preloader
@@ -1915,6 +1936,7 @@ This email was automatically generated from your portfolio website.
         
         menuToggle.addEventListener('click', function() {
             nav.classList.toggle('active');
+            menuToggle.classList.toggle('active'); /* Toggle active class on menu-toggle */
         });
 
         // Close mobile menu when a link is clicked
