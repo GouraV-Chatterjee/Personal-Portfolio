@@ -137,33 +137,6 @@
             display: flex;
             gap: 30px;
             list-style: none;
-            transition: all 0.3s ease; /* Add transition for smooth animation */
-        }
-
-        /* Mobile navigation styles */
-        .nav.active {
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 60px; /* Below the header */
-            left: 0;
-            width: 100%;
-            height: calc(100vh - 60px); /* Full height minus header */
-            background: var(--dark-bg); /* Dark background for overlay */
-            justify-content: center;
-            align-items: center;
-            gap: 40px; /* Larger gap for mobile links */
-            z-index: 999;
-            transform: translateX(0); /* Ensure it's visible */
-        }
-
-        .nav.active a {
-            font-size: 1.8rem; /* Larger font size for mobile links */
-            color: var(--text-light);
-        }
-
-        .nav.active a::after {
-            background: var(--brand-color);
         }
 
         .nav a {
@@ -198,19 +171,6 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
-            z-index: 1001; /* Ensure it's above the nav when active */
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         .menu-toggle span {
@@ -534,7 +494,6 @@
             margin-top: 50px; /* Adjusted margin-top to bring it down */
             animation: floatAnimation 3s ease-in-out infinite; /* Apply the floating animation */
             transform: translateY(20px); /* Initial position offset */
-            margin-top: 250px; /* Adjusted margin-top to bring it down */
         }
 
         .hero-image-container img {
@@ -564,18 +523,13 @@
 
         @media (max-width: 768px) {
             .hero {
-                flex-direction: column-reverse; /* Stack content on mobile, image first */
+                flex-direction: column; /* Stack content on mobile */
                 gap: 30px; /* Reduce gap on mobile */
-            }
-
-            .hero-image-container {
-                margin-top: 250px; /* Add margin to push it down on mobile */
             }
 
             .hero-content {
                 margin-right: 0; /* Remove margin on mobile */
                 text-align: center; /* Center text on mobile */
-                margin-top: 0; /* Remove extra top margin on mobile */
             }
 
             .cta-buttons {
@@ -583,9 +537,8 @@
             }
 
             .hero-image-container {
-                width: 250px; /* Smaller image on mobile */
-                height: 250px; /* Smaller image on mobile */
-                margin-top: 0; /* Remove extra top margin on mobile */
+                width: 300px; /* Smaller image on mobile */
+                height: 300px; /* Smaller image on mobile */
             }
         }
 
@@ -1034,7 +987,7 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav {
-                display: none; /* Hidden by default, controlled by JS for active state */
+                display: none;
             }
 
             .menu-toggle {
@@ -1078,7 +1031,14 @@
             }
 
             .exp-icon {
-                display: none; /* Keep icons hidden on mobile */
+                position: relative; /* Change to relative positioning */
+                margin-bottom: 20px; /* Add margin below icon */
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                left: auto !important; /* Reset left */
+                top: auto !important; /* Reset top */
+                transform: none; /* Remove previous transform */
             }
 
             .contact-content {
@@ -1127,88 +1087,6 @@
                 height: 200px;
                 font-size: 3rem;
             }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 100%;
-                max-width: 250px; /* Slightly smaller max-width for buttons */
-            }
-
-            .section-title h2 {
-                font-size: 2rem; /* Smaller title on very small screens */
-            }
-
-            .section-title p {
-                font-size: 1rem; /* Smaller subtitle on very small screens */
-            }
-
-            .about-text h3 {
-                font-size: 1.5rem; /* Smaller about title */
-            }
-
-            .about-text p {
-                font-size: 0.95rem; /* Smaller about text */
-            }
-
-            .skill-tag {
-                padding: 8px 15px; /* Smaller skill tags */
-                font-size: 0.9rem;
-            }
-
-            .exp-title {
-                font-size: 1.4rem; /* Smaller experience title */
-            }
-
-            .exp-company {
-                font-size: 1rem; /* Smaller company name */
-            }
-
-            .exp-duration {
-                font-size: 0.85rem; /* Smaller duration */
-            }
-
-            .exp-description {
-                font-size: 0.9rem; /* Smaller description */
-            }
-
-            .contact-info h3 {
-                font-size: 1.8rem; /* Smaller contact info title */
-            }
-
-            .contact-item p {
-                font-size: 0.9rem; /* Smaller contact item text */
-            }
-
-            .contact-form h3 {
-                font-size: 1.8rem; /* Smaller form title */
-            }
-
-            .contact-form p {
-                font-size: 0.9rem; /* Smaller form subtitle */
-            }
-
-            .form-group label {
-                font-size: 0.9rem; /* Smaller form labels */
-            }
-
-            .form-group input,
-            .form-group textarea {
-                padding: 12px; /* Smaller form inputs */
-                font-size: 0.9rem;
-            }
-
-            .social-link i {
-                font-size: 1.5rem; /* Smaller social icons */
-            }
-        }
-
-        /* Prevent scrolling when mobile menu is open */
-        body.no-scroll {
-            overflow: hidden;
         }
 
     </style>
@@ -1989,27 +1867,12 @@ This email was automatically generated from your portfolio website.
                 });
         });
 
-        // Mobile menu toggle
+        // Mobile menu toggle (if needed)
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.nav');
-        const header = document.querySelector('.header'); // Get header for potential class toggle
-
+        
         menuToggle.addEventListener('click', function() {
-            nav.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-            // Optional: Add a class to body to prevent scrolling when menu is open
-            document.body.classList.toggle('no-scroll');
-        });
-
-        // Close mobile menu when a link is clicked
-        document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', function() {
-                if (nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                    menuToggle.classList.remove('active');
-                    document.body.classList.remove('no-scroll');
-                }
-            });
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
         });
 
         // Typing effect for hero title
