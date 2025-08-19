@@ -145,6 +145,17 @@
             list-style: none;
         }
 
+        .nav.mobile-menu a {
+            padding: 10px 0;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid rgba(102, 217, 237, 0.05);
+        }
+
+        .nav.mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
         .nav a {
             color: var(--text-muted);
             text-decoration: none;
@@ -993,7 +1004,26 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav {
-                display: none;
+                display: none; /* Hide default nav on mobile */
+                position: absolute; /* Apply absolute positioning for mobile menu */
+                top: 60px; /* Below the header */
+                left: 0;
+                width: 100%;
+                background: #0f0f0f; /* Dark background for the menu */
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                border-top: 1px solid rgba(102, 217, 237, 0.1);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .nav.active { /* Use .nav.active instead of .nav.mobile-menu.active */
+                display: flex !important; /* Show when active, override display: none from .nav */
+                opacity: 1;
+                transform: translateY(0);
             }
 
             .menu-toggle {
@@ -1879,13 +1909,21 @@ This email was automatically generated from your portfolio website.
                 });
         });
 
-        // Mobile menu toggle (if needed)
+        // Mobile menu toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.nav');
         
         menuToggle.addEventListener('click', function() {
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            nav.classList.toggle('active');
         });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav a').forEach(link => { // Changed selector from .nav.mobile-menu a to .nav a
+            link.addEventListener('click', function() {
+                nav.classList.remove('active');
+            });
+        });
+        // Removed duplicate event listener for menuToggle
 
         // Typing effect for hero title
         function typeWriter(element, text, speed = 100, callback) {
