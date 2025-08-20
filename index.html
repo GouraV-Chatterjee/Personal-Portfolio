@@ -1069,6 +1069,10 @@
                 font-size: 4rem;
             }
 
+            .exp-timeline {
+                padding: 0; /* Removed horizontal padding for the timeline container */
+            }
+
             .exp-timeline::before {
                 content: none; /* Ensure no line on mobile */
             }
@@ -1076,14 +1080,14 @@
             .exp-item {
                 flex-direction: column !important;
                 align-items: center; /* Center items on mobile */
-                margin-bottom: 60px;
+                margin-bottom: 30px; /* Increased vertical margin between cards for mobile */
                 min-height: auto;
             }
 
             .exp-content {
-                width: 90%; /* Make cards wider on mobile */
-                margin-left: auto !important;
-                margin-right: auto !important;
+                width: 100%; /* Make cards full width on mobile */
+                margin: 0; /* Remove all margins */
+                padding: 10px; /* Reduced padding to make content fit better */
             }
 
             .exp-content::before {
